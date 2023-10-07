@@ -1,0 +1,66 @@
+query--
+
+1.select * from users;
+2.select * from progress;
+
+
+What are the Top 25 schools (.edu domains)?
+
+3.SELECT email_domain FROM users 
+  WHERE email_domain 
+  LIKE '%.edu%' 
+  LIMIT 25;
+
+How many .edu learners are located in New York?
+
+4.SELECT COUNT(*) FROM users
+  WHERE email_domain 
+  LIKE '%.edu%' 
+  AND 
+  city='New York';
+
+
+The mobile_app column contains either mobile-user or NULL. How many of these Codecademy learners are using the mobile app?
+
+5.SELECT COUNT(mobile_app) FROM users ;
+
+The data type of the sign_up_at column is DATETIME. It is for storing a date/time value in the database.
+
+6.SELECT sign_up_at,
+  strftime('%H',sign_up_at),
+  COUNT(*) FROM users 
+  GROUP BY 1
+  LIMIT 50;
+
+
+Join the two tables using JOIN and then see what you can dig out of the data!
+
+a).What courses are the New Yorkers students taking?
+
+7.SELECT users.user_id,
+  users.city,
+  progress.learn_cpp,
+  progress.learn_sql,
+  progress.learn_html,
+  progress.learn_javascript,
+  progress.learn_java
+  FROM users
+  JOIN progress
+  ON users.user_id = progress.user_id
+  where city='New York';
+
+b).What courses are the Chicago students taking?
+
+8.SELECT users.user_id,
+  users.city,
+  progress.learn_cpp,
+  progress.learn_sql,
+  progress.learn_html,
+  progress.learn_javascript,
+  progress.learn_java
+  FROM users
+  JOIN progress
+  ON users.user_id = progress.user_id
+  where city='Chicago';
+
+
